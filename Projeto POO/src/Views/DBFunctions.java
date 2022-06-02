@@ -144,74 +144,77 @@ public class DBFunctions {
         return false;
     }
 
-    public void search(String nome, String preco, String qntd, javax.swing.JTable dm) {
-        try {
-            if (nome != "" && preco.equals("") && qntd.equals("")) {
-                ((DefaultTableModel) dm.getModel()).setRowCount(0);
-                String sql = "SELECT * FROM produto WHERE nome_produto='" + nome + "'";
-                Statement s = connection.prepareStatement(sql);
-                ResultSet rs = s.executeQuery(sql);
-                while (rs.next()) {
-                    String linha[]
-                            = {
-                                String.valueOf(rs.getInt(1)),
-                                rs.getString(2),
-                                rs.getString(3),
-                                String.valueOf(rs.getInt(4))
-                            };
-                    ((DefaultTableModel) dm.getModel()).addRow(linha);
-
-                }
-                s.close();
-                return;
-            }
-            if (nome.equals("") && preco != "" && qntd.equals("")) {
-                ((DefaultTableModel) dm.getModel()).setRowCount(0);
-                String sql = "SELECT * FROM produto WHERE preco_produto='" + preco + "'";
-                Statement s = connection.prepareStatement(sql);
-                ResultSet rs = s.executeQuery(sql);
-                while (rs.next()) {
-                    String linha[]
-                            = {
-                                String.valueOf(rs.getInt(1)),
-                                rs.getString(2),
-                                rs.getString(3),
-                                String.valueOf(rs.getInt(4))
-                            };
-                    ((DefaultTableModel) dm.getModel()).addRow(linha);
-
-                }
-                s.close();
-                return;
-            }
-            if (nome.equals("") && preco.equals("") && qntd != "") {
-                ((DefaultTableModel) dm.getModel()).setRowCount(0);
-                String sql = "SELECT * FROM produto WHERE quantidade_produto='" + qntd + "'";
-                Statement s = connection.prepareStatement(sql);
-                ResultSet rs = s.executeQuery(sql);
-                while (rs.next()) {
-                    String linha[]
-                            = {
-                                String.valueOf(rs.getInt(1)),
-                                rs.getString(2),
-                                rs.getString(3),
-                                String.valueOf(rs.getInt(4))
-                            };
-                    ((DefaultTableModel) dm.getModel()).addRow(linha);
-
-                }
-                s.close();
-                return;
-            } 
-            
-            throw new Exception("Insira apenas um campo para busca!");
-           
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    e.getMessage(),
-                    "ERRO",
-                    JOptionPane.ERROR_MESSAGE);
-        }
-    }
+    
 }
+
+
+// public void search(String nome, String preco, String qntd, javax.swing.JTable dm) {
+//        try {
+//            if (nome != "" && preco.equals("") && qntd.equals("")) {
+//                ((DefaultTableModel) dm.getModel()).setRowCount(0);
+//                String sql = "SELECT * FROM produto WHERE nome_produto='" + nome + "'";
+//                Statement s = connection.prepareStatement(sql);
+//                ResultSet rs = s.executeQuery(sql);
+//                while (rs.next()) {
+//                    String linha[]
+//                            = {
+//                                String.valueOf(rs.getInt(1)),
+//                                rs.getString(2),
+//                                rs.getString(3),
+//                                String.valueOf(rs.getInt(4))
+//                            };
+//                    ((DefaultTableModel) dm.getModel()).addRow(linha);
+//
+//                }
+//                s.close();
+//                return;
+//            }
+//            if (nome.equals("") && preco != "" && qntd.equals("")) {
+//                ((DefaultTableModel) dm.getModel()).setRowCount(0);
+//                String sql = "SELECT * FROM produto WHERE preco_produto='" + preco + "'";
+//                Statement s = connection.prepareStatement(sql);
+//                ResultSet rs = s.executeQuery(sql);
+//                while (rs.next()) {
+//                    String linha[]
+//                            = {
+//                                String.valueOf(rs.getInt(1)),
+//                                rs.getString(2),
+//                                rs.getString(3),
+//                                String.valueOf(rs.getInt(4))
+//                            };
+//                    ((DefaultTableModel) dm.getModel()).addRow(linha);
+//
+//                }
+//                s.close();
+//                return;
+//            }
+//            if (nome.equals("") && preco.equals("") && qntd != "") {
+//                ((DefaultTableModel) dm.getModel()).setRowCount(0);
+//                String sql = "SELECT * FROM produto WHERE quantidade_produto='" + qntd + "'";
+//                Statement s = connection.prepareStatement(sql);
+//                ResultSet rs = s.executeQuery(sql);
+//                while (rs.next()) {
+//                    String linha[]
+//                            = {
+//                                String.valueOf(rs.getInt(1)),
+//                                rs.getString(2),
+//                                rs.getString(3),
+//                                String.valueOf(rs.getInt(4))
+//                            };
+//                    ((DefaultTableModel) dm.getModel()).addRow(linha);
+//
+//                }
+//                s.close();
+//                return;
+//            } 
+//            
+//            throw new Exception("Insira apenas um campo para busca!");
+//           
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(
+//                    null,
+//                    e.getMessage(),
+//                    "ERRO",
+//                    JOptionPane.ERROR_MESSAGE);
+//        }
+//    }

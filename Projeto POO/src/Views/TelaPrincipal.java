@@ -265,12 +265,37 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchActionPerformed
         
-        if(Nome.getText().equals("") && Preco.getText().equals("") && Qntd.getText().equals("")){
-            JOptionPane.showMessageDialog(null, "Preencha um campo para a busca!");
-            return;
+        String nome = Nome.getText();
+        int i;
+        for (i = 0; i < jTable1.getRowCount(); i++) {
+            if (jTable1.getValueAt(i, 1).toString().contains(nome)) {
+                jTable1.setRowSelectionInterval(i, i);
+                Id.setText(jTable1.getValueAt(i, 0).toString());
+                Nome.setText(jTable1.getValueAt(i, 1).toString());
+                Preco.setText(jTable1.getValueAt(i, 2).toString());
+                Qntd.setText(jTable1.getValueAt(i, 3).toString());
+                Update.setEnabled(true);
+                Delete.setEnabled(true);
+                Create.setEnabled(false);
+                break;
+            }
         }
-       
-        dbFunctions.search(Nome.getText(), Preco.getText(), Qntd.getText(), jTable1);
+        if (i == jTable1.getRowCount()) {
+            jTable1.clearSelection();
+            Id.setText("");
+            Nome.setText("");
+            Preco.setText("");
+            Qntd.setText("");
+            Delete.setEnabled(false);
+            Update.setEnabled(false);
+            Create.setEnabled(true);
+            
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Elemento não encontrado!",
+                    "ERRO",
+                    JOptionPane.ERROR_MESSAGE);
+        }
         
     }//GEN-LAST:event_SearchActionPerformed
 
