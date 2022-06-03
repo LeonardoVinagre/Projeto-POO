@@ -8,6 +8,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import java.sql.*;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -42,8 +45,9 @@ public class Login extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         fieldPassword = new javax.swing.JPasswordField();
         painelAcoes = new javax.swing.JPanel();
-        buttonClose = new javax.swing.JButton();
         buttonLogin = new javax.swing.JButton();
+        createAccount = new javax.swing.JButton();
+        buttonClose = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -80,25 +84,33 @@ public class Login extends javax.swing.JFrame {
         painelAcoes.setBackground(new java.awt.Color(250, 250, 250));
         painelAcoes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        buttonClose.setText("Sair");
-        buttonClose.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonCloseActionPerformed(evt);
-            }
-        });
-        painelAcoes.add(buttonClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 80, -1));
-
         buttonLogin.setText("Entrar");
         buttonLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonLoginActionPerformed(evt);
             }
         });
-        painelAcoes.add(buttonLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, -1, -1));
+        painelAcoes.add(buttonLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, -1, -1));
 
-        painel.add(painelAcoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 230, 50));
+        createAccount.setText("Criar conta");
+        createAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createAccountActionPerformed(evt);
+            }
+        });
+        painelAcoes.add(createAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, -1, -1));
+
+        painel.add(painelAcoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 190, 50));
 
         jPanel1.add(painel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 230, 180));
+
+        buttonClose.setText("Sair");
+        buttonClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCloseActionPerformed(evt);
+            }
+        });
+        jPanel1.add(buttonClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 60, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
 
@@ -108,9 +120,9 @@ public class Login extends javax.swing.JFrame {
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
         try {
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/curso",
-                    "aluno",
-                    "segredo");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/achadosperdidos",
+                    "adm",
+                    "root");
             statement = connection.createStatement();
             ResultSet result = statement.executeQuery(
                 "SELECT * FROM usuario WHERE login='" +
@@ -147,6 +159,20 @@ public class Login extends javax.swing.JFrame {
     private void buttonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCloseActionPerformed
         dispose();
     }//GEN-LAST:event_buttonCloseActionPerformed
+
+    private void createAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccountActionPerformed
+        JFrame frame = new JFrame("Glass pane");
+        frame.setSize(400,400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        
+        JPanel p1 = new JPanel();
+        JLabel label = new JLabel("glasspane ex");
+        p1.add(label);
+        frame.getContentPane().add(p1);
+        frame.setVisible(true);
+        painel.setVisible(false);
+    }//GEN-LAST:event_createAccountActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,6 +212,7 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonClose;
     private javax.swing.JButton buttonLogin;
+    private javax.swing.JButton createAccount;
     private javax.swing.JTextField fieldLogin;
     private javax.swing.JPasswordField fieldPassword;
     private javax.swing.JLabel jLabel1;

@@ -7,9 +7,9 @@ import javax.swing.table.DefaultTableModel;
 public class DBFunctions {
 
     Connection connection;
-    String server = "jdbc:mysql://localhost:3306/curso";
-    String username = "aluno";
-    String password = "segredo";
+    String server = "jdbc:mysql://localhost:3306/achadosperdidos";
+    String username = "adm";
+    String password = "root";
 
     public void openConnection() {
         try {
@@ -31,7 +31,7 @@ public class DBFunctions {
     public void getData(javax.swing.JTable dm) {
 
         String sql = "SELECT * FROM produto";
-
+        System.out.println("chego");
         try {
             Statement s = connection.prepareStatement(sql);
             ResultSet rs = s.executeQuery(sql);
@@ -42,10 +42,13 @@ public class DBFunctions {
                             String.valueOf(rs.getInt(1)),
                             rs.getString(2),
                             rs.getString(3),
-                            String.valueOf(rs.getInt(4))
+                            rs.getString(4),
+                            rs.getString(5)
                         };
+                
                 ((DefaultTableModel) dm.getModel()).addRow(linha);
             }
+            
             s.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(
@@ -56,12 +59,12 @@ public class DBFunctions {
         }
     }
 
-    public Boolean create(String nome, String preco, String qntd) {
+    public Boolean create(String nome, String desc, String data, String status) {
         try {
-            if (nome.equals("") || preco.equals("") || qntd.equals("")) {
+            if (nome.equals("") || desc.equals("") || data.equals("") || status.equals("")) {
                 throw new Exception("Prreencha todos os campos!");
             }
-            String sql = "INSERT INTO produto VALUES(null,'" + nome + "','" + preco + "'," + qntd + ")";
+            String sql = "INSERT INTO produto VALUES(null,'" + nome + "','" + desc + "','" + data + "','" + status + "')";
             if (verifyExistence(nome) == true) {
                 throw new Exception("Produto ja inserido!");
             }
@@ -101,10 +104,11 @@ public class DBFunctions {
         return false;
     }
 
-    public Boolean update(String id, String nome, String preco, String qntd) {
+    public Boolean update(String id, String nome, String desc, String data, String status) {
         String sql = "UPDATE produto SET nome_produto ='" + nome
-                + "',preco_produto='" + preco
-                + "',quantidade_produto='" + qntd
+                + "',descricao_produto='" + desc
+                + "',data_produto='" + data
+                + "',status_produto='" + status
                 + "' WHERE id_produto='" + id + "'";
         try {
             Statement s = connection.prepareStatement(sql);
