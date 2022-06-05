@@ -1,5 +1,6 @@
 package Views;
 
+import java.awt.Color;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -8,8 +9,8 @@ public class DBFunctions {
 
     Connection connection;
     String server = "jdbc:mysql://localhost:3306/achadosperdidos";
-    String username = "adm";
-    String password = "root";
+    String username = "admim";
+    String password = "toor";
 
     public void openConnection() {
         try {
@@ -26,16 +27,20 @@ public class DBFunctions {
                     JOptionPane.ERROR_MESSAGE);
         }
     }
+    public void closeConnection(){
+        closeConnection();
+    }
     
 
     public void getData(javax.swing.JTable dm) {
 
         String sql = "SELECT * FROM produto";
-        System.out.println("chego");
+        
         try {
             Statement s = connection.prepareStatement(sql);
             ResultSet rs = s.executeQuery(sql);
-
+            
+            
             while (rs.next()) {
                 String linha[]
                         = {
@@ -46,7 +51,10 @@ public class DBFunctions {
                             rs.getString(5)
                         };
                 
+                
+             
                 ((DefaultTableModel) dm.getModel()).addRow(linha);
+                
             }
             
             s.close();
@@ -147,7 +155,27 @@ public class DBFunctions {
         
         return false;
     }
-
+    
+    public Boolean createUser(String login, String senha, String nome){
+        String sql = "INSERT INTO usuario VALUES('" + login + "',SHA1('" + senha + "'),'" + nome + "')";
+        
+        try{
+            if(nome.equals("") || login.equals("") || senha.equals("")){
+                throw new Exception("Preencha todos os campos!");
+            }
+            Statement s = connection.prepareStatement(sql);
+            s.execute(sql);
+            s.close();
+            return true;
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(
+                    null,
+                    e.getMessage(),
+                    "ERRO",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        return false;
+    }
     
 }
 

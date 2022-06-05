@@ -8,9 +8,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import java.sql.*;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 /**
  *
@@ -25,6 +22,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+       this.setVisible(true);
     }
 
     /**
@@ -121,8 +119,8 @@ public class Login extends javax.swing.JFrame {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/achadosperdidos",
-                    "adm",
-                    "root");
+                    "admim",
+                    "toor");
             statement = connection.createStatement();
             ResultSet result = statement.executeQuery(
                 "SELECT * FROM usuario WHERE login='" +
@@ -134,7 +132,8 @@ public class Login extends javax.swing.JFrame {
             if (result.next()) {
                 TelaPrincipal tp = new TelaPrincipal();
                 tp.setVisible(true);
-                this.setVisible(false);
+               
+                this.dispose();
             } else {
                 throw new Exception("Login ou senha incorretos!");
             }
@@ -161,53 +160,16 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonCloseActionPerformed
 
     private void createAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccountActionPerformed
-        JFrame frame = new JFrame("Glass pane");
-        frame.setSize(400,400);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
-        
-        JPanel p1 = new JPanel();
-        JLabel label = new JLabel("glasspane ex");
-        p1.add(label);
-        frame.getContentPane().add(p1);
-        frame.setVisible(true);
-        painel.setVisible(false);
+            CadastroUsuario cadastroUsuario = new CadastroUsuario();
+            cadastroUsuario.setVisible(true);
+            this.setVisible(false);     
     }//GEN-LAST:event_createAccountActionPerformed
 
+    
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Login().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonClose;
