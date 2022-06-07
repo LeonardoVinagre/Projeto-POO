@@ -42,17 +42,18 @@ public class DBFunctions {
             
             
             while (rs.next()) {
+                String data = rs.getString(4);
+                String[] format = data.split("-");
+                String newData = format[2]+"-"+format[1]+"-"+format[0];
                 String linha[]
                         = {
                             String.valueOf(rs.getInt(1)),
                             rs.getString(2),
                             rs.getString(3),
-                            rs.getString(4),
+                            newData,
                             rs.getString(5)
                         };
                 
-                
-             
                 ((DefaultTableModel) dm.getModel()).addRow(linha);
                 
             }
@@ -72,7 +73,11 @@ public class DBFunctions {
             if (nome.equals("") || desc.equals("") || data.equals("") || status.equals("")) {
                 throw new Exception("Prreencha todos os campos!");
             }
-            String sql = "INSERT INTO produto VALUES(null,'" + nome + "','" + desc + "','" + data + "','" + status + "')";
+            String[] format = data.split("-");
+            
+            String newData = format[2]+"-"+format[1]+"-"+format[0];
+            
+            String sql = "INSERT INTO produto VALUES(null,'" + nome + "','" + desc + "','" + newData + "','" + status + "')";
             if (verifyExistence(nome) == true) {
                 throw new Exception("Produto ja inserido!");
             }

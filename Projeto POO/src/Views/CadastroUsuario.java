@@ -42,6 +42,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
         Cadastrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastro de usuario");
 
         jLabel1.setText("Nome completo:");
 

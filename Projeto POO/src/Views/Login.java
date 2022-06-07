@@ -45,9 +45,10 @@ public class Login extends javax.swing.JFrame {
         painelAcoes = new javax.swing.JPanel();
         buttonLogin = new javax.swing.JButton();
         createAccount = new javax.swing.JButton();
-        buttonClose = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Login");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(250, 250, 250));
@@ -102,13 +103,8 @@ public class Login extends javax.swing.JFrame {
 
         jPanel1.add(painel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 230, 180));
 
-        buttonClose.setText("Sair");
-        buttonClose.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonCloseActionPerformed(evt);
-            }
-        });
-        jPanel1.add(buttonClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 60, -1));
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\leonardo.vinagre\\Documents\\NetBeansProjects\\POO - Faculdade\\Projeto-POO\\Projeto POO\\Assets\\login.png")); // NOI18N
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
 
@@ -155,10 +151,6 @@ public class Login extends javax.swing.JFrame {
 
     }//GEN-LAST:event_buttonLoginActionPerformed
 
-    private void buttonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCloseActionPerformed
-        dispose();
-    }//GEN-LAST:event_buttonCloseActionPerformed
-
     private void createAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccountActionPerformed
             CadastroUsuario cadastroUsuario = new CadastroUsuario();
             cadastroUsuario.setVisible(true);
@@ -172,13 +164,13 @@ public class Login extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonClose;
     private javax.swing.JButton buttonLogin;
     private javax.swing.JButton createAccount;
     private javax.swing.JTextField fieldLogin;
     private javax.swing.JPasswordField fieldPassword;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel painel;
     private javax.swing.JPanel painelAcoes;
