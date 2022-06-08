@@ -1,0 +1,11 @@
+CREATE DATABASE achadosperdidos; 
+CREATE USER adm@'%' IDENTIFIED BY 'toor'; 
+GRANT ALL ON achadosperdidos.* TO adm; 
+USE achadosperdidos;
+CREATE TABLE produto(id_produto INTEGER PRIMARY KEY AUTO_INCREMENT, nome_produto VARCHAR(50) NOT NULL, descricao_produto VARCHAR(100) NOT NULL, data_produto DATE NOT NULL,status_produto ENUM('Aberto','Fechado') NOT NULL);
+INSERT INTO produto VALUES(null,'Camiseta','vermelha com gola V','2001/12/13','Fechado');
+INSERT INTO produto VALUES(null,'Meia','preta com buraco no dedão','2019/12/22','Aberto');
+INSERT INTO produto VALUES(null,'calça','legging preta','1999/12/30','Fechado');
+CREATE TABLE usuario(login VARCHAR(20) BINARY UNIQUE NOT NULL, senha CHAR(40) BINARY, nome VARCHAR(50) NOT NULL); 
+INSERT INTO usuario VALUES('Leonardo',SHA1('root'),'Leonardo Rossi Vinagre');
+INSERT INTO usuario VALUES('Douglas',SHA1('root'),'Douglas Sturion');

@@ -9,7 +9,7 @@ public class DBFunctions {
 
     Connection connection;
     String server = "jdbc:mysql://localhost:3306/achadosperdidos";
-    String username = "admim";
+    String username = "adm";
     String password = "toor";
 
     public void openConnection() {
@@ -118,9 +118,12 @@ public class DBFunctions {
     }
 
     public Boolean update(String id, String nome, String desc, String data, String status) {
+        String[] format = data.split("-");
+            
+        String newData = format[2]+"-"+format[1]+"-"+format[0];
         String sql = "UPDATE produto SET nome_produto ='" + nome
                 + "',descricao_produto='" + desc
-                + "',data_produto='" + data
+                + "',data_produto='" + newData
                 + "',status_produto='" + status
                 + "' WHERE id_produto='" + id + "'";
         try {

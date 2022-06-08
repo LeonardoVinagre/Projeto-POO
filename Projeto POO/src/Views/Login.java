@@ -115,7 +115,7 @@ public class Login extends javax.swing.JFrame {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/achadosperdidos",
-                    "admim",
+                    "adm",
                     "toor");
             statement = connection.createStatement();
             ResultSet result = statement.executeQuery(
