@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package Views;
 
 import java.sql.DriverManager;
@@ -9,20 +6,19 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import java.sql.*;
 
-/**
- *
- * @author leonardo.vinagre
- */
+
 public class Login extends javax.swing.JFrame {
 
     Connection connection;
     Statement statement;
+    DBFunctions dbFunctions = new DBFunctions();
+
     /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
-       this.setVisible(true);
+        this.setVisible(true);
     }
 
     /**
@@ -112,56 +108,32 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/achadosperdidos",
-                    "adm",
-                    "toor");
-            statement = connection.createStatement();
-            ResultSet result = statement.executeQuery(
-                "SELECT * FROM usuario WHERE login='" +
-                fieldLogin.getText() +
-                "' AND senha=SHA1('" +
-                new String(fieldPassword.getPassword()) +
-                "');"
-              );
-            if (result.next()) {
-                TelaPrincipal tp = new TelaPrincipal();
-                tp.setVisible(true);
-               
-                this.dispose();
-            } else {
-                throw new Exception("Login ou senha incorretos!");
-            }
-        } catch (Exception e) {
+        dbFunctions.openConnection();
+
+        if (dbFunctions.login(fieldLogin.getText(), new String(fieldPassword.getPassword()))) {
+            TelaPrincipal tp = new TelaPrincipal();
+            tp.setVisible(true);
+
+            this.dispose();
+        } else {
             JOptionPane.showMessageDialog(this,
-                    e.getMessage(),
+                    "Login não identificado!",
                     "ERRO",
                     JOptionPane.ERROR_MESSAGE);
         }
-        try {
-            statement.close();
-            connection.close();
-        } catch (Exception f) {
-            JOptionPane.showMessageDialog(this,
-                    f.getMessage(),
-                    "ERRO",
-                    JOptionPane.ERROR_MESSAGE);
-        }
+
 
     }//GEN-LAST:event_buttonLoginActionPerformed
 
     private void createAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccountActionPerformed
-            CadastroUsuario cadastroUsuario = new CadastroUsuario();
-            cadastroUsuario.setVisible(true);
-            this.setVisible(false);     
+        CadastroUsuario cadastroUsuario = new CadastroUsuario();
+        cadastroUsuario.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_createAccountActionPerformed
 
-    
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonLogin;

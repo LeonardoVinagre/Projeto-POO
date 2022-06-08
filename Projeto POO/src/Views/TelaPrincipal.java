@@ -1,4 +1,3 @@
-
 package Views;
 
 import java.awt.Color;
@@ -9,9 +8,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-
-
 public class TelaPrincipal extends javax.swing.JFrame {
+
     Connection connection;
     DBFunctions dbFunctions = new DBFunctions();
 
@@ -26,24 +24,24 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void fillTable() {
         ((DefaultTableModel) jTable1.getModel()).setRowCount(0);
-        dbFunctions.getData(jTable1);  
+        dbFunctions.getData(jTable1);
         jTable1.getColumnModel().getColumn(4).setCellRenderer(renderer);
     }
-    
-    DefaultTableCellRenderer renderer = new DefaultTableCellRenderer() {
-     @Override
-     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-         Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); 
 
-         String str = (String) value;
-         if ("Fechado".equals(str)) {
-             c.setBackground(Color.GREEN);
-        } else {
-             c.setBackground(Color.RED);
-         }
-         
-return c;
-   }
+    DefaultTableCellRenderer renderer = new DefaultTableCellRenderer() {
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+            String str = (String) value;
+            if ("Fechado".equals(str)) {
+                c.setBackground(Color.GREEN);
+            } else {
+                c.setBackground(Color.RED);
+            }
+
+            return c;
+        }
     };
 
     private void closeConnection() throws Exception {
@@ -293,7 +291,7 @@ return c;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void fieldCleaner(){
+    private void fieldCleaner() {
         Id.setText("");
         Nome.setText("");
         Descricao.setText("");
@@ -309,18 +307,17 @@ return c;
         SearchOp.setSelectedIndex(0);
         fillTable();
     }
-    
+
     private void CreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateActionPerformed
-        if(dbFunctions.create(Nome.getText(), Descricao.getText(), Data.getText(), Status.getSelectedItem().toString())){
+        if (dbFunctions.create(Nome.getText(), Descricao.getText(), Data.getText(), Status.getSelectedItem().toString())) {
             JOptionPane.showMessageDialog(null, "Inserção realizada com sucesso!");
             fieldCleaner();
-            
-        }
-        else{
+
+        } else {
             JOptionPane.showMessageDialog(null, "Inserção não realizada!");
         }
 
-            
+
     }//GEN-LAST:event_CreateActionPerformed
 
     private void CleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CleanActionPerformed
@@ -328,7 +325,7 @@ return c;
     }//GEN-LAST:event_CleanActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        if(evt.getClickCount() == 2){
+        if (evt.getClickCount() == 2) {
             Search.setEnabled(false);
             Create.setEnabled(false);
             Pesquisa.setEnabled(false);
@@ -336,12 +333,12 @@ return c;
             Delete.setEnabled(true);
             Update.setEnabled(true);
             int row = (jTable1.getSelectedRow());
-            Id.setText((String)jTable1.getModel().getValueAt(row, 0));
-            Nome.setText((String)jTable1.getModel().getValueAt(row, 1));
-            Descricao.setText((String)jTable1.getModel().getValueAt(row, 2));
-            Data.setText((String)jTable1.getModel().getValueAt(row, 3));
-            Status.setSelectedItem(jTable1.getModel().getValueAt(row,4));
-           
+            Id.setText((String) jTable1.getModel().getValueAt(row, 0));
+            Nome.setText((String) jTable1.getModel().getValueAt(row, 1));
+            Descricao.setText((String) jTable1.getModel().getValueAt(row, 2));
+            Data.setText((String) jTable1.getModel().getValueAt(row, 3));
+            Status.setSelectedItem(jTable1.getModel().getValueAt(row, 4));
+
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -349,10 +346,10 @@ return c;
         int op = SearchOp.getSelectedIndex();
         System.out.println(op);
         int i;
-        switch(op){
+        switch (op) {
             case 1:
                 String nome = Pesquisa.getText();
-                
+
                 for (i = 0; i < jTable1.getRowCount(); i++) {
                     if (jTable1.getValueAt(i, 1).toString().contains(nome)) {
                         jTable1.setRowSelectionInterval(i, i);
@@ -386,7 +383,7 @@ return c;
                 break;
             case 2:
                 String data = Pesquisa.getText();
-                
+
                 for (i = 0; i < jTable1.getRowCount(); i++) {
                     if (jTable1.getValueAt(i, 3).toString().contains(data)) {
                         jTable1.setRowSelectionInterval(i, i);
@@ -419,7 +416,7 @@ return c;
                 }
                 break;
         }
-        
+
     }//GEN-LAST:event_SearchActionPerformed
 
     private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
@@ -430,38 +427,35 @@ return c;
             return;
         }
 
-        if(dbFunctions.delete(Id.getText())){
+        if (dbFunctions.delete(Id.getText())) {
             JOptionPane.showMessageDialog(null, "Deletado com sucesso!");
             fieldCleaner();
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(null, "Não deletado!");
         }
-        
-        
+
+
     }//GEN-LAST:event_DeleteActionPerformed
 
     private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateActionPerformed
 
-        if(Nome.getText().equals("") || Descricao.getText().equals("") || Data.getText().equals("")) {
+        if (Nome.getText().equals("") || Descricao.getText().equals("") || Data.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Preencha todos os campos para atualizar!");
             return;
         }
-        if(dbFunctions.update(Id.getText(), Nome.getText(), Descricao.getText(), Data.getText(), Status.getSelectedItem().toString())){
+        if (dbFunctions.update(Id.getText(), Nome.getText(), Descricao.getText(), Data.getText(), Status.getSelectedItem().toString())) {
             JOptionPane.showMessageDialog(null, "Produto atualizado!");
             fieldCleaner();
-            
-        }
-        else{
+
+        } else {
             JOptionPane.showMessageDialog(null, "Produto não atualizado!");
         }
-   
+
     }//GEN-LAST:event_UpdateActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Clean;

@@ -1,28 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package Views;
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import java.sql.*;
-/**
- *
- * @author leonardo.vinagre
- */
+
+
 public class CadastroUsuario extends javax.swing.JFrame {
-    
+
     DBFunctions dbFunctions = new DBFunctions();
-    
+
     /**
      * Creates new form CadastroUsuario
      */
     public CadastroUsuario() {
         initComponents();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -115,20 +110,18 @@ public class CadastroUsuario extends javax.swing.JFrame {
 
     private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
         dbFunctions.openConnection();
-        
-        if(dbFunctions.createUser(Login.getText(), Senha.getText(), NomeCompleto.getText())){
+
+        if (dbFunctions.createUser(Login.getText(), Senha.getText(), NomeCompleto.getText())) {
             JOptionPane.showMessageDialog(null, "Usuario criado com sucesso!");
+        } else {
+            return;
         }
-        else{
-            JOptionPane.showMessageDialog(null, "Erro");
-        }
-        
+
     }//GEN-LAST:event_CadastrarActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cadastrar;
