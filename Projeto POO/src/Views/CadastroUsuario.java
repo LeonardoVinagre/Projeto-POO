@@ -1,10 +1,7 @@
 
 package Views;
 
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import javax.swing.JOptionPane;
-import java.sql.*;
 
 
 public class CadastroUsuario extends javax.swing.JFrame {
@@ -38,6 +35,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de usuario");
+        setResizable(false);
 
         jLabel1.setText("Nome completo:");
 

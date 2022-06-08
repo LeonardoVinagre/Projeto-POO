@@ -1,6 +1,5 @@
 package Views;
 
-import java.awt.Color;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -77,7 +76,7 @@ public class DBFunctions {
             String newData = format[2] + "-" + format[1] + "-" + format[0];
 
             String sql = "INSERT INTO produto VALUES(null,'" + nome + "','" + desc + "','" + newData + "','" + status + "')";
-            if (verifyExistence(nome) == true) {
+            if (verifyExistence(nome, desc) == true) {
                 throw new Exception("Produto ja inserido!");
             }
 
@@ -140,15 +139,19 @@ public class DBFunctions {
         return false;
     }
 
-    public Boolean verifyExistence(String nome) {
+    public Boolean verifyExistence(String nome, String desc) {
         String sql = "SELECT * FROM produto WHERE nome_produto='" + nome + "'";
-
+        String sql2 = "SELECT * FROM produto WHERE descricao_produto='" + desc + "'";
         try {
             Statement s = connection.prepareStatement(sql);
             ResultSet rs = s.executeQuery(sql);
             if (rs.next() == true) {
-                s.close();
-                return true;
+                s = connection.prepareStatement(sql2);
+                rs = s.executeQuery(sql2);
+                if (rs.next() == true) {
+                    s.close();
+                    return true;
+                }
             }
             s.close();
             return false;
